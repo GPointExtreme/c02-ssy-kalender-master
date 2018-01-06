@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 
 // Load routes into variables
 const index = require('./routes/index');
+const users = require('./routes/users'); //G: hinzugefügt für users.js
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Configure routes in Express webserver
 app.use('/', index);
+app.use('/users', users); //G: hinzugefügt für users.js
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
