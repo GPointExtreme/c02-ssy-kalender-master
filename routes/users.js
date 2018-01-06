@@ -9,7 +9,17 @@ let userCollection = db.getCollection('users');
 router.get('/', getAllUsers);
 
 function getAllUsers(request, response) {
-	let userObjects = userCollection.find();
+	let nameQuery = request.query.name;
+	
+	let userObjects = [];
+	if (typeof nameQuery !== 'undefined') {
+		userObjects = userCollection.where(function (user) {
+			return (user.name === nameQuery);
+		});
+	} else {
+		userObjects = userCollection.find();
+	}
+	
 	response.json(userObjects);
 }
 

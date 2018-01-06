@@ -9,7 +9,19 @@ let eventCollection = db.getCollection('events');
 router.get('/', getAllEvents);
 
 function getAllEvents(request, response) {
-	let events = eventCollection.find();
+	let events = null;
+	
+	let participantQuery = request.query.participant;
+	if(typeof participantQuery !== 'undefined') {
+		let userCollection = db.getCollection('users');
+		let user = userCollection.get(participantQuery);
+		events = eventCollection.where(function (ev) {
+			return ev.participants.includes(user);
+		});
+	} else {
+		events = eventCollection.find();
+	}
+	
 	response.json(events);
 }
 
