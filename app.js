@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const index = require('./routes/index');
 const users = require('./routes/users'); //G: hinzugefügt für users.js
 const calendars = require('./routes/calendars'); //G: hinzugefügt für calendars.js
+const events = require('./routes/events'); //G: hinzugefügt für events.js
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users); //G: hinzugefügt für users.js
 app.use('/calendars', calendars); //G: hinzugefügt für calendars.js
+app.use('/events', events); //G: hinzugefügt für events.js
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
